@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.UUID;
 
-public class PlayerInfomation extends InfomationData{
+public class PlayerInfomation extends InfomationData {
     @SerializedName("displayName")
     public String displayName;
 

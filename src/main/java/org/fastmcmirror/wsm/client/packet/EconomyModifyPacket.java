@@ -9,7 +9,7 @@ public class EconomyModifyPacket {
     @SerializedName("count")
     public double count;
 
-    public EconomyModifyPacket(String name,double count){
+    public EconomyModifyPacket(String name, double count) {
         this.name = name;
         this.count = count;
     }

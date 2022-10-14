@@ -8,16 +8,15 @@ import java.util.Map;
 
 public class InfomationParser {
     public static InfomationData lastParsed;
+    private static Map<String, Class<?>> infomationMap = new HashMap<>();
 
-    public static void parse(JsonObject jsonObject){
+    public static void parse(JsonObject jsonObject) {
         String type = jsonObject.get("type").getAsString();
         if (!infomationMap.containsKey(type)) return;
-        lastParsed = (InfomationData) new Gson().fromJson(jsonObject.get("data"),infomationMap.get(type));
+        lastParsed = (InfomationData) new Gson().fromJson(jsonObject.get("data"), infomationMap.get(type));
     }
 
-    private static Map<String,Class<?>> infomationMap = new HashMap<>();
-
-    public static void register(String type,Class<?> cl){
-        infomationMap.put(type,cl);
+    public static void register(String type, Class<?> cl) {
+        infomationMap.put(type, cl);
     }
 }

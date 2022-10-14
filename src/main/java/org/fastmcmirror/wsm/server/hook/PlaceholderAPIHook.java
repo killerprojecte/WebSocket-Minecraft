@@ -5,8 +5,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 
 public class PlaceholderAPIHook {
-    public static String parse(String placeholder, OfflinePlayer player){
-        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI")==null) return placeholder;
-        return PlaceholderAPI.setPlaceholders(player,placeholder);
+    public static String parse(String placeholder, OfflinePlayer player) {
+        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") == null) return placeholder;
+        return PlaceholderAPI.setPlaceholders(player, placeholder);
     }
 }

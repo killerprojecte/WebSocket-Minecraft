@@ -6,7 +6,7 @@ public class GetOfflinePlayerPacket {
     @SerializedName("name")
     public String name;
 
-    public GetOfflinePlayerPacket(String name){
+    public GetOfflinePlayerPacket(String name) {
         this.name = name;
     }
 }

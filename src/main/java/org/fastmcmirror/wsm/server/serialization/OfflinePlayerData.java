@@ -6,30 +6,26 @@ import org.bukkit.OfflinePlayer;
 import java.util.UUID;
 
 public class OfflinePlayerData {
-    public OfflinePlayerData(OfflinePlayer offlinePlayer){
+    @SerializedName("name")
+    public String name;
+    @SerializedName("uniqueId")
+    public UUID uniqueId;
+    @SerializedName("lastPlayed")
+    public long lastPlayed;
+    @SerializedName("firstPlayed")
+    public long firstPlayed;
+    @SerializedName("bedSpawnLocation")
+    public LocationData location;
+
+    public OfflinePlayerData(OfflinePlayer offlinePlayer) {
         name = offlinePlayer.getName();
         uniqueId = offlinePlayer.getUniqueId();
         lastPlayed = offlinePlayer.getLastPlayed();
         firstPlayed = offlinePlayer.getFirstPlayed();
-        if (offlinePlayer.getBedSpawnLocation()==null){
+        if (offlinePlayer.getBedSpawnLocation() == null) {
             location = null;
         } else {
             location = new LocationData(offlinePlayer.getBedSpawnLocation());
         }
     }
-
-    @SerializedName("name")
-    public String name;
-
-    @SerializedName("uniqueId")
-    public UUID uniqueId;
-
-    @SerializedName("lastPlayed")
-    public long lastPlayed;
-
-    @SerializedName("firstPlayed")
-    public long firstPlayed;
-
-    @SerializedName("bedSpawnLocation")
-    public LocationData location;
 }

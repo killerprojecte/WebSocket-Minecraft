@@ -2,7 +2,7 @@ package org.fastmcmirror.wsm.client.data;
 
 import com.google.gson.annotations.SerializedName;
 
-public class EconomyChangeInfomation extends InfomationData{
+public class EconomyChangeInfomation extends InfomationData {
     @SerializedName("status")
     public boolean status;
 

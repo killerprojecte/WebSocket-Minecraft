@@ -2,7 +2,7 @@ package org.fastmcmirror.wsm.client.data;
 
 import com.google.gson.annotations.SerializedName;
 
-public class LocationInfomation extends InfomationData{
+public class LocationInfomation extends InfomationData {
     @SerializedName("x")
     public double x;
 

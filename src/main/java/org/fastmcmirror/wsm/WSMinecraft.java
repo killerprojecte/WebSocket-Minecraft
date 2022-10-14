@@ -19,13 +19,13 @@ public final class WSMinecraft extends JavaPlugin {
         instance = this;
         saveDefaultConfig();
         getLogger().info("[WS-Minecraft] Starting WebSocket-Server...");
-        thread = new Thread(wsServer = new WebSocketServer(new InetSocketAddress(getConfig().getInt("port")),getConfig().getString("token")));
+        thread = new Thread(wsServer = new WebSocketServer(new InetSocketAddress(getConfig().getInt("port")), getConfig().getString("token")));
         thread.start();
         getLogger().info("[WS-Minecraft] WebSocket-Server Started!");
-        if (Bukkit.getPluginManager().getPlugin("Vault")!=null){
+        if (Bukkit.getPluginManager().getPlugin("Vault") != null) {
             VaultHook.setup();
         }
-        if (Bukkit.getPluginManager().getPlugin("PlayerPoints")!=null){
+        if (Bukkit.getPluginManager().getPlugin("PlayerPoints") != null) {
             PlayerPointsHook.setup();
         }
         // Plugin startup logic

@@ -9,7 +9,7 @@ public class PlayerPointsModifyPacket {
     @SerializedName("count")
     public int count;
 
-    public PlayerPointsModifyPacket(String name,int count){
+    public PlayerPointsModifyPacket(String name, int count) {
         this.name = name;
         this.count = count;
     }

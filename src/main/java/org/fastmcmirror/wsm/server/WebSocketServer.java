@@ -10,18 +10,19 @@ import java.net.InetSocketAddress;
 
 public class WebSocketServer extends org.java_websocket.server.WebSocketServer {
 
-    private String token;
     public static long starttime;
+    private String token;
 
-    public WebSocketServer(InetSocketAddress inetSocketAddress,String token){
+    public WebSocketServer(InetSocketAddress inetSocketAddress, String token) {
         super(inetSocketAddress);
         this.token = token;
         starttime = System.currentTimeMillis();
     }
+
     @Override
     public void onOpen(WebSocket conn, ClientHandshake handshake) {
-        if (!conn.getResourceDescriptor().substring(1).equals(token)){
-            conn.close(1003,"Forbidden Access");
+        if (!conn.getResourceDescriptor().substring(1).equals(token)) {
+            conn.close(1003, "Forbidden Access");
         }
         System.out.println("[WS-Minecraft][INFO] new connection: " + conn.getRemoteSocketAddress().getAddress().getHostAddress());
     }
@@ -34,7 +35,7 @@ public class WebSocketServer extends org.java_websocket.server.WebSocketServer {
     @Override
     public void onMessage(WebSocket conn, String message) {
         JsonObject object = new JsonParser().parse(message).getAsJsonObject();
-        CommandParser.parseCommand(conn,object);
+        CommandParser.parseCommand(conn, object);
     }
 
     @Override

@@ -12,7 +12,7 @@ public class HasPermissionPacket {
     @SerializedName("permission")
     public String permission;
 
-    public HasPermissionPacket(String world,String name,String permission){
+    public HasPermissionPacket(String world, String name, String permission) {
         this.world = world;
         this.name = name;
         this.permission = permission;

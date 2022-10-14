@@ -9,7 +9,7 @@ public class PlaceholderParsePacket {
     @SerializedName("placeholder")
     public String placeholder;
 
-    public PlaceholderParsePacket(String name,String placeholder){
+    public PlaceholderParsePacket(String name, String placeholder) {
         this.name = name;
         this.placeholder = placeholder;
     }

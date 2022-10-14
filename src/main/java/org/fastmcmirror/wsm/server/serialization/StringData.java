@@ -6,7 +6,7 @@ public class StringData {
     @SerializedName("data")
     public String data;
 
-    public StringData(String data){
+    public StringData(String data) {
         this.data = data;
     }
 }

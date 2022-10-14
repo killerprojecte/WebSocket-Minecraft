@@ -6,7 +6,22 @@ import org.bukkit.entity.Player;
 import java.util.UUID;
 
 public class PlayerData {
-    public PlayerData(Player player){
+    @SerializedName("displayName")
+    public String displayName;
+    @SerializedName("name")
+    public String name;
+    @SerializedName("gamemode")
+    public String gamemode;
+    @SerializedName("health")
+    public double health;
+    @SerializedName("location")
+    public LocationData location;
+    @SerializedName("world")
+    public WorldData world;
+    @SerializedName("uniqueId")
+    public UUID uniqueId;
+
+    public PlayerData(Player player) {
         displayName = player.getDisplayName();
         name = player.getName();
         gamemode = player.getGameMode().toString();
@@ -15,25 +30,4 @@ public class PlayerData {
         world = new WorldData(player.getWorld());
         uniqueId = player.getUniqueId();
     }
-
-    @SerializedName("displayName")
-    public String displayName;
-
-    @SerializedName("name")
-    public String name;
-
-    @SerializedName("gamemode")
-    public String gamemode;
-
-    @SerializedName("health")
-    public double health;
-
-    @SerializedName("location")
-    public LocationData location;
-
-    @SerializedName("world")
-    public WorldData world;
-
-    @SerializedName("uniqueId")
-    public UUID uniqueId;
 }

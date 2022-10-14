@@ -12,6 +12,7 @@ public class VaultHook {
     public static Economy econ = null;
     public static Permission perms = null;
     public static Chat chat = null;
+
     private static boolean setupEconomy() {
         if (getServer().getPluginManager().getPlugin("Vault") == null) {
             return false;
@@ -36,14 +37,14 @@ public class VaultHook {
         return perms != null;
     }
 
-    public static void setup(){
-        if (setupEconomy()){
+    public static void setup() {
+        if (setupEconomy()) {
             Bukkit.getLogger().info("[Vault-Hook] Loaded Vault-Economy Module");
         }
-        if (setupChat()){
+        if (setupChat()) {
             Bukkit.getLogger().info("[Vault-Hook] Loaded Vault-Chat Module");
         }
-        if (setupPermissions()){
+        if (setupPermissions()) {
             Bukkit.getLogger().info("[Vault-Hook] Loaded Vault-Permissions Module");
         }
     }

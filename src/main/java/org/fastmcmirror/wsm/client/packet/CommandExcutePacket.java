@@ -8,7 +8,7 @@ public class CommandExcutePacket {
     @SerializedName("commands")
     public List<String> commands;
 
-    public CommandExcutePacket(List<String> list){
+    public CommandExcutePacket(List<String> list) {
         commands = list;
     }
 }

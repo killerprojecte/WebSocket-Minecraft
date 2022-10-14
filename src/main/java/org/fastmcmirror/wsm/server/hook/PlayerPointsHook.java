@@ -8,8 +8,8 @@ import org.fastmcmirror.wsm.WSMinecraft;
 public class PlayerPointsHook {
     public static PlayerPointsAPI api = null;
 
-    public static void setup(){
-        if (Bukkit.getPluginManager().getPlugin("PlayerPoints")!=null){
+    public static void setup() {
+        if (Bukkit.getPluginManager().getPlugin("PlayerPoints") != null) {
             api = ((PlayerPoints) Bukkit.getPluginManager().getPlugin("PlayerPoints")).getAPI();
             WSMinecraft.instance.getLogger().info("[PlayerPoints-Hook] Loaded PlayerPoints Moudle");
         }

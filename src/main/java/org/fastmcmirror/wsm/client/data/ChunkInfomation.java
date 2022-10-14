@@ -1,9 +1,8 @@
 package org.fastmcmirror.wsm.client.data;
 
 import com.google.gson.annotations.SerializedName;
-import java.util.List;
 
-public class ChunkInfomation extends InfomationData{
+public class ChunkInfomation extends InfomationData {
 
     @SerializedName("isLoaded")
     public boolean isLoaded;
