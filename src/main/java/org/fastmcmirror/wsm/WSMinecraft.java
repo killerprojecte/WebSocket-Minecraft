@@ -5,6 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.fastmcmirror.wsm.server.WebSocketServer;
 import org.fastmcmirror.wsm.server.hook.PlayerPointsHook;
 import org.fastmcmirror.wsm.server.hook.VaultHook;
+import org.java_websocket.WebSocket;
 
 import java.net.InetSocketAddress;
 
@@ -35,6 +36,9 @@ public final class WSMinecraft extends JavaPlugin {
     @Override
     public void onDisable() {
         try {
+            for (WebSocket webSocket : wsServer.getConnections()){
+                webSocket.close(1000,"closed");
+            }
             wsServer.stop();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
