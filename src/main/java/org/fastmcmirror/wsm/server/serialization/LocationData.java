@@ -1,7 +1,6 @@
 package org.fastmcmirror.wsm.server.serialization;
 
 import com.google.gson.annotations.SerializedName;
-import org.bukkit.Chunk;
 import org.bukkit.Location;
 
 public class LocationData {
@@ -12,7 +11,7 @@ public class LocationData {
         yaw = location.getYaw();
         pitch = location.getPitch();
         world = new WorldData(location.getWorld());
-        chunk = location.getChunk();
+        chunk = new ChunkData(location.getChunk());
     }
 
     @SerializedName("x")
@@ -34,5 +33,5 @@ public class LocationData {
     public WorldData world;
 
     @SerializedName("chunk")
-    public Chunk chunk;
+    public ChunkData chunk;
 }

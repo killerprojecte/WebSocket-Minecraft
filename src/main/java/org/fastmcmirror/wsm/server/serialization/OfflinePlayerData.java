@@ -11,7 +11,11 @@ public class OfflinePlayerData {
         uniqueId = offlinePlayer.getUniqueId();
         lastPlayed = offlinePlayer.getLastPlayed();
         firstPlayed = offlinePlayer.getFirstPlayed();
-        location = new LocationData(offlinePlayer.getBedSpawnLocation());
+        if (offlinePlayer.getBedSpawnLocation()==null){
+            location = null;
+        } else {
+            location = new LocationData(offlinePlayer.getBedSpawnLocation());
+        }
     }
 
     @SerializedName("name")

@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 
 public class ChunkData {
     public ChunkData(Chunk chunk){
-        entities = Arrays.stream(chunk.getEntities()).map(entity -> new EntityData(entity)).collect(Collectors.toList());
         isLoaded = chunk.isLoaded();
         x = chunk.getX();
         z = chunk.getZ();
@@ -17,9 +16,6 @@ public class ChunkData {
         isSlimeChunk = chunk.isSlimeChunk();
         world = new WorldData(chunk.getWorld());
     }
-
-    @SerializedName("entitys")
-    public List<EntityData> entities;
 
     @SerializedName("isLoaded")
     public boolean isLoaded;

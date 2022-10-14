@@ -2,13 +2,11 @@ package org.fastmcmirror.wsm.server.serialization;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
-public class ArrayData {
-    public ArrayData(List<?> list){
-        this.list = list;
+public class BooleanData {
+    public BooleanData(boolean data){
+        this.data = data;
     }
 
     @SerializedName("data")
-    public List<?> list;
+    public boolean data;
 }

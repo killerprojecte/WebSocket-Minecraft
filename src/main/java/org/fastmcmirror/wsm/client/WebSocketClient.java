@@ -1,8 +1,7 @@
 package org.fastmcmirror.wsm.client;
 
 import com.google.gson.JsonParser;
-import org.fastmcmirror.wsm.client.data.InfomationParser;
-import org.fastmcmirror.wsm.client.data.WebSocketInfomation;
+import org.fastmcmirror.wsm.client.data.*;
 import org.java_websocket.handshake.ServerHandshake;
 
 import java.net.URI;
@@ -12,6 +11,16 @@ public class WebSocketClient extends org.java_websocket.client.WebSocketClient {
     public WebSocketClient(URI serverUri) {
         super(serverUri);
         InfomationParser.register("websocket", WebSocketInfomation.class);
+        InfomationParser.register("offlinePlayerData", OfflinePlayerInfomation.class);
+        InfomationParser.register("playerData", PlayerInfomation.class);
+        InfomationParser.register("offlinePlayersData", OfflinePlayersInfomation.class);
+        InfomationParser.register("onlinePlayersData", PlayersInfomation.class);
+        InfomationParser.register("playerPointsData", IntInfomation.class);
+        InfomationParser.register("changedPlayerPointsData", PlayerPointsChangeInfomation.class);
+        InfomationParser.register("economyData", DoubleInfomation.class);
+        InfomationParser.register("changedEconomyData", EconomyChangeInfomation.class);
+        InfomationParser.register("hasPermissionData", BooleanInfomation.class);
+        InfomationParser.register("placeholder", StringInfomation.class);
     }
 
     public WebSocketClient(String url) throws URISyntaxException {
