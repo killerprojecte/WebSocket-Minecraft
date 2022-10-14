@@ -1,0 +1,6 @@
+name: WSMinecraft
+version: '${version}'
+main: org.fastmcmirror.wsm.WSMinecraft
+api-version: 1.13
+authors: [ FlyProject ]
+description: Using WebSocket Linked Minecraft Server

@@ -1,0 +1,6 @@
+{
+  "type": "websocket",
+  "data": {
+    "worktime": 1000
+  }
+}
