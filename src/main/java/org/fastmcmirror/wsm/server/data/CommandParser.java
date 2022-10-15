@@ -181,6 +181,10 @@ public class CommandParser {
                     webSocket.send(new TypeData("placeholder", new Gson().toJsonTree(new StringData(PlaceholderAPIHook.parse(subData.placeholder, Bukkit.getOfflinePlayer(subData.name)))), syncId).getJson());
                     break;
                 }
+                default: {
+                    CustomParser.parse(webSocket, data.commandId, syncId, data.data);
+                    break;
+                }
             }
         });
     }
