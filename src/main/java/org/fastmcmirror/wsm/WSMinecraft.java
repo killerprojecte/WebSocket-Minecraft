@@ -36,8 +36,8 @@ public final class WSMinecraft extends JavaPlugin {
     @Override
     public void onDisable() {
         try {
-            for (WebSocket webSocket : wsServer.getConnections()){
-                webSocket.close(1000,"closed");
+            for (WebSocket webSocket : wsServer.getConnections()) {
+                webSocket.close(1000, "closed");
             }
             wsServer.stop();
         } catch (InterruptedException e) {

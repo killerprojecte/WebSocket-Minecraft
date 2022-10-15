@@ -9,10 +9,13 @@ public class TypeData {
     public String type;
     @SerializedName("data")
     public JsonElement data;
+    @SerializedName("syncId")
+    public long syncId;
 
-    public TypeData(String type, JsonElement data) {
+    public TypeData(String type, JsonElement data, long syncId) {
         this.type = type;
         this.data = data;
+        this.syncId = syncId;
     }
 
     public String getJson() {

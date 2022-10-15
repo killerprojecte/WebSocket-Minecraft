@@ -9,4 +9,7 @@ public class CommandParserData {
 
     @SerializedName("data")
     public JsonObject data;
+
+    @SerializedName("syncId")
+    public long syncId;
 }

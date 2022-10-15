@@ -1,13 +1,19 @@
 package org.fastmcmirror.wsm.client;
 
 import com.google.gson.JsonParser;
+import org.fastmcmirror.wsm.client.command.CommandSender;
 import org.fastmcmirror.wsm.client.data.*;
 import org.java_websocket.handshake.ServerHandshake;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class WebSocketClient extends org.java_websocket.client.WebSocketClient {
+    public static WebSocketClient webSocket;
+    public static Map<Long, CommandSender<?>> tasks = new HashMap<>();
+
     public WebSocketClient(URI serverUri) {
         super(serverUri);
         InfomationParser.register("websocket", WebSocketInfomation.class);
@@ -21,6 +27,7 @@ public class WebSocketClient extends org.java_websocket.client.WebSocketClient {
         InfomationParser.register("changedEconomyData", EconomyChangeInfomation.class);
         InfomationParser.register("hasPermissionData", BooleanInfomation.class);
         InfomationParser.register("placeholder", StringInfomation.class);
+        webSocket = this;
     }
 
     public WebSocketClient(String url) throws URISyntaxException {

@@ -29,7 +29,7 @@ public class WebSocketServer extends org.java_websocket.server.WebSocketServer {
 
     @Override
     public void onClose(WebSocket conn, int code, String reason, boolean remote) {
-        if (code==1000) return;
+        if (code == 1000) return;
         System.out.println("[WS-Minecraft][INFO] Connection closed: " + conn.getRemoteSocketAddress().getAddress().getHostAddress() + ", code: " + code + ", reason: " + reason);
     }
 

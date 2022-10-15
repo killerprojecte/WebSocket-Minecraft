@@ -21,6 +21,7 @@ public class CommandParser {
     public static void parseCommand(WebSocket webSocket, JsonObject jsonObject) {
         CommandParserData data = new Gson().fromJson(jsonObject, CommandParserData.class);
         Bukkit.getScheduler().runTask(WSMinecraft.instance, () -> {
+            long syncId = data.syncId;
             switch (data.commandId) {
                 case "test": {
                     System.out.println("test!");
@@ -44,12 +45,12 @@ public class CommandParser {
                 }
                 case "getOfflinePlayer": {
                     GetOfflinePlayerData subData = new Gson().fromJson(data.data, GetOfflinePlayerData.class);
-                    webSocket.send(new TypeData("offlinePlayerData", new Gson().toJsonTree(new OfflinePlayerData(Bukkit.getOfflinePlayer(subData.name))).getAsJsonObject()).getJson());
+                    webSocket.send(new TypeData("offlinePlayerData", new Gson().toJsonTree(new OfflinePlayerData(Bukkit.getOfflinePlayer(subData.name))).getAsJsonObject(), syncId).getJson());
                     break;
                 }
                 case "getPlayer": {
                     GetOfflinePlayerData subData = new Gson().fromJson(data.data, GetOfflinePlayerData.class);
-                    webSocket.send(new TypeData("playerData", new Gson().toJsonTree(new PlayerData(Bukkit.getPlayer(subData.name))).getAsJsonObject()).getJson());
+                    webSocket.send(new TypeData("playerData", new Gson().toJsonTree(new PlayerData(Bukkit.getPlayer(subData.name))), syncId).getJson());
                     break;
                 }
                 case "getOfflinePlayers": {
@@ -57,7 +58,7 @@ public class CommandParser {
                             new Gson().toJsonTree(
                                     new ArrayData(getOfflinePlayers())
                             )
-                    ).getJson());
+                            , syncId).getJson());
                     break;
                 }
                 case "getOnlinePlayers": {
@@ -65,119 +66,119 @@ public class CommandParser {
                             new Gson().toJsonTree(
                                     new ArrayData(getPlayers())
                             )
-                    ).getJson());
+                            , syncId).getJson());
                     break;
                 }
                 case "getPlayerPoints": {
                     GetOfflinePlayerData subData = new Gson().fromJson(data.data, GetOfflinePlayerData.class);
                     if (PlayerPointsHook.api == null) {
-                        webSocket.send(new TypeData("playerPointsData", JsonNull.INSTANCE).getJson());
+                        webSocket.send(new TypeData("playerPointsData", JsonNull.INSTANCE, syncId).getJson());
                         break;
                     }
                     webSocket.send(new TypeData("playerPointsData", new Gson().toJsonTree(new IntData(
                             PlayerPointsHook.api.look(Bukkit.getOfflinePlayer(subData.name).getUniqueId())
-                    ))).getJson());
+                    )), syncId).getJson());
                     break;
                 }
                 case "takePlayerPoints": {
                     PlayerPointsModifyData subData = new Gson().fromJson(data.data, PlayerPointsModifyData.class);
                     if (PlayerPointsHook.api == null) {
-                        webSocket.send(new TypeData("changedPlayerPointsData", JsonNull.INSTANCE).getJson());
+                        webSocket.send(new TypeData("changedPlayerPointsData", JsonNull.INSTANCE, syncId).getJson());
                         break;
                     }
                     int has = PlayerPointsHook.api.look(Bukkit.getOfflinePlayer(subData.name).getUniqueId());
                     int count = subData.count;
                     if (count > has) {
-                        webSocket.send(new TypeData("changedPlayerPointsData", new Gson().toJsonTree(new PlayerPointsChangedData(false, has, count - has))).getJson());
+                        webSocket.send(new TypeData("changedPlayerPointsData", new Gson().toJsonTree(new PlayerPointsChangedData(false, has, count - has)), syncId).getJson());
                     } else {
                         PlayerPointsHook.api.take(Bukkit.getOfflinePlayer(subData.name).getUniqueId(), count);
-                        webSocket.send(new TypeData("changedPlayerPointsData", new Gson().toJsonTree(new PlayerPointsChangedData(true, PlayerPointsHook.api.look(Bukkit.getOfflinePlayer(subData.name).getUniqueId()), 0))).getJson());
+                        webSocket.send(new TypeData("changedPlayerPointsData", new Gson().toJsonTree(new PlayerPointsChangedData(true, PlayerPointsHook.api.look(Bukkit.getOfflinePlayer(subData.name).getUniqueId()), 0)), syncId).getJson());
                     }
                     break;
                 }
                 case "givePlayerPoints": {
                     PlayerPointsModifyData subData = new Gson().fromJson(data.data, PlayerPointsModifyData.class);
                     if (PlayerPointsHook.api == null) {
-                        webSocket.send(new TypeData("changedPlayerPointsData", JsonNull.INSTANCE).getJson());
+                        webSocket.send(new TypeData("changedPlayerPointsData", JsonNull.INSTANCE, syncId).getJson());
                         break;
                     }
                     int count = subData.count;
                     PlayerPointsHook.api.give(Bukkit.getOfflinePlayer(subData.name).getUniqueId(), count);
-                    webSocket.send(new TypeData("changedPlayerPointsData", new Gson().toJsonTree(new PlayerPointsChangedData(true, PlayerPointsHook.api.look(Bukkit.getOfflinePlayer(subData.name).getUniqueId()), 0))).getJson());
+                    webSocket.send(new TypeData("changedPlayerPointsData", new Gson().toJsonTree(new PlayerPointsChangedData(true, PlayerPointsHook.api.look(Bukkit.getOfflinePlayer(subData.name).getUniqueId()), 0)), syncId).getJson());
                     break;
                 }
                 case "setPlayerPoints": {
                     PlayerPointsModifyData subData = new Gson().fromJson(data.data, PlayerPointsModifyData.class);
                     if (PlayerPointsHook.api == null) {
-                        webSocket.send(new TypeData("changedPlayerPointsData", JsonNull.INSTANCE).getJson());
+                        webSocket.send(new TypeData("changedPlayerPointsData", JsonNull.INSTANCE, syncId).getJson());
                         break;
                     }
                     int count = subData.count;
                     PlayerPointsHook.api.set(Bukkit.getOfflinePlayer(subData.name).getUniqueId(), count);
-                    webSocket.send(new TypeData("changedPlayerPointsData", new Gson().toJsonTree(new PlayerPointsChangedData(true, PlayerPointsHook.api.look(Bukkit.getOfflinePlayer(subData.name).getUniqueId()), 0))).getJson());
+                    webSocket.send(new TypeData("changedPlayerPointsData", new Gson().toJsonTree(new PlayerPointsChangedData(true, PlayerPointsHook.api.look(Bukkit.getOfflinePlayer(subData.name).getUniqueId()), 0)), syncId).getJson());
                     break;
                 }
                 case "getEconomy": {
                     GetOfflinePlayerData subData = new Gson().fromJson(data.data, GetOfflinePlayerData.class);
                     if (VaultHook.econ == null) {
-                        webSocket.send(new TypeData("economyData", JsonNull.INSTANCE).getJson());
+                        webSocket.send(new TypeData("economyData", JsonNull.INSTANCE, syncId).getJson());
                         break;
                     }
                     webSocket.send(new TypeData("economyData", new Gson().toJsonTree(new DoubleData(
                             VaultHook.econ.getBalance(Bukkit.getOfflinePlayer(subData.name))
-                    ))).getJson());
+                    )), syncId).getJson());
                 }
                 case "takeEconomy": {
                     EconomyModifyData subData = new Gson().fromJson(data.data, EconomyModifyData.class);
                     if (VaultHook.econ == null) {
-                        webSocket.send(new TypeData("changedEconomyData", JsonNull.INSTANCE).getJson());
+                        webSocket.send(new TypeData("changedEconomyData", JsonNull.INSTANCE, syncId).getJson());
                         break;
                     }
                     double has = VaultHook.econ.getBalance(Bukkit.getOfflinePlayer(subData.name));
                     double count = subData.count;
                     if (count > has) {
-                        webSocket.send(new TypeData("changedEconomyData", new Gson().toJsonTree(new EconomyChangedData(false, has, count - has))).getJson());
+                        webSocket.send(new TypeData("changedEconomyData", new Gson().toJsonTree(new EconomyChangedData(false, has, count - has)), syncId).getJson());
                     } else {
                         VaultHook.econ.withdrawPlayer(Bukkit.getOfflinePlayer(subData.name), count);
-                        webSocket.send(new TypeData("changedEconomyData", new Gson().toJsonTree(new EconomyChangedData(true, VaultHook.econ.getBalance(Bukkit.getOfflinePlayer(subData.name)), 0))).getJson());
+                        webSocket.send(new TypeData("changedEconomyData", new Gson().toJsonTree(new EconomyChangedData(true, VaultHook.econ.getBalance(Bukkit.getOfflinePlayer(subData.name)), 0)), syncId).getJson());
                     }
                     break;
                 }
                 case "giveEconomy": {
                     EconomyModifyData subData = new Gson().fromJson(data.data, EconomyModifyData.class);
                     if (VaultHook.econ == null) {
-                        webSocket.send(new TypeData("changedEconomyData", JsonNull.INSTANCE).getJson());
+                        webSocket.send(new TypeData("changedEconomyData", JsonNull.INSTANCE, syncId).getJson());
                         break;
                     }
                     double count = subData.count;
                     VaultHook.econ.depositPlayer(Bukkit.getOfflinePlayer(subData.name), count);
-                    webSocket.send(new TypeData("changedEconomyData", new Gson().toJsonTree(new EconomyChangedData(true, VaultHook.econ.getBalance(Bukkit.getOfflinePlayer(subData.name)), 0))).getJson());
+                    webSocket.send(new TypeData("changedEconomyData", new Gson().toJsonTree(new EconomyChangedData(true, VaultHook.econ.getBalance(Bukkit.getOfflinePlayer(subData.name)), 0)), syncId).getJson());
                     break;
                 }
                 case "setEconomy": {
                     EconomyModifyData subData = new Gson().fromJson(data.data, EconomyModifyData.class);
                     if (VaultHook.econ == null) {
-                        webSocket.send(new TypeData("changedEconomyData", JsonNull.INSTANCE).getJson());
+                        webSocket.send(new TypeData("changedEconomyData", JsonNull.INSTANCE, syncId).getJson());
                         break;
                     }
                     double count = subData.count;
                     VaultHook.econ.withdrawPlayer(Bukkit.getOfflinePlayer(subData.name), VaultHook.econ.getBalance(Bukkit.getOfflinePlayer(subData.name)));
                     VaultHook.econ.depositPlayer(Bukkit.getOfflinePlayer(subData.name), count);
-                    webSocket.send(new TypeData("changedEconomyData", new Gson().toJsonTree(new EconomyChangedData(true, VaultHook.econ.getBalance(Bukkit.getOfflinePlayer(subData.name)), 0))).getJson());
+                    webSocket.send(new TypeData("changedEconomyData", new Gson().toJsonTree(new EconomyChangedData(true, VaultHook.econ.getBalance(Bukkit.getOfflinePlayer(subData.name)), 0)), syncId).getJson());
                     break;
                 }
                 case "hasPermission": {
                     HasPermissionData subData = new Gson().fromJson(data.data, HasPermissionData.class);
                     if (VaultHook.perms == null) {
-                        webSocket.send(new TypeData("hasPermissionData", JsonNull.INSTANCE).getJson());
+                        webSocket.send(new TypeData("hasPermissionData", JsonNull.INSTANCE, syncId).getJson());
                         break;
                     }
-                    webSocket.send(new TypeData("hasPermissionData", new Gson().toJsonTree(new BooleanData(VaultHook.perms.playerHas(subData.world, Bukkit.getOfflinePlayer(subData.name), subData.permission)))).getJson());
+                    webSocket.send(new TypeData("hasPermissionData", new Gson().toJsonTree(new BooleanData(VaultHook.perms.playerHas(subData.world, Bukkit.getOfflinePlayer(subData.name), subData.permission))), syncId).getJson());
                     break;
                 }
                 case "parsePlaceholder": {
                     PlaceholderData subData = new Gson().fromJson(data.data, PlaceholderData.class);
-                    webSocket.send(new TypeData("placeholder", new Gson().toJsonTree(new StringData(PlaceholderAPIHook.parse(subData.placeholder, Bukkit.getOfflinePlayer(subData.name))))).getJson());
+                    webSocket.send(new TypeData("placeholder", new Gson().toJsonTree(new StringData(PlaceholderAPIHook.parse(subData.placeholder, Bukkit.getOfflinePlayer(subData.name)))), syncId).getJson());
                     break;
                 }
             }
