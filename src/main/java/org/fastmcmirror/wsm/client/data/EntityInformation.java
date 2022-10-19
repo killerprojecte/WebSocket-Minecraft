@@ -4,15 +4,15 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.UUID;
 
-public class EntityInfomation extends InfomationData {
+public class EntityInformation extends InformationData {
     @SerializedName("world")
-    public WorldInfomation world;
+    public WorldInformation world;
 
     @SerializedName("type")
     public String type;
 
     @SerializedName("location")
-    public LocationInfomation location;
+    public LocationInformation location;
 
     @SerializedName("customName")
     public String customName;

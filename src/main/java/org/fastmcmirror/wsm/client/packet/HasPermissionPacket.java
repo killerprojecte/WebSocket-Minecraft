@@ -3,7 +3,7 @@ package org.fastmcmirror.wsm.client.packet;
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 import org.fastmcmirror.wsm.client.command.CommandType;
-import org.fastmcmirror.wsm.client.data.BooleanInfomation;
+import org.fastmcmirror.wsm.client.data.BooleanInformation;
 
 public class HasPermissionPacket extends CommandPacket {
     @SerializedName("world")
@@ -14,7 +14,7 @@ public class HasPermissionPacket extends CommandPacket {
 
     @SerializedName("permission")
     public String permission;
-    public BooleanInfomation infomation;
+    public BooleanInformation information;
 
     public HasPermissionPacket(String world, String name, String permission) {
         this.world = world;
@@ -34,7 +34,7 @@ public class HasPermissionPacket extends CommandPacket {
 
     @Override
     public HasPermissionPacket complete(String json) {
-        infomation = new Gson().fromJson(json, BooleanInfomation.class);
+        information = new Gson().fromJson(json, BooleanInformation.class);
         future.complete(this);
         return this;
     }

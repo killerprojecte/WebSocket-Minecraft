@@ -3,7 +3,7 @@ package org.fastmcmirror.wsm.client.packet;
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 import org.fastmcmirror.wsm.client.command.CommandType;
-import org.fastmcmirror.wsm.client.data.EconomyChangeInfomation;
+import org.fastmcmirror.wsm.client.data.EconomyChangeInformation;
 
 public class EconomyModifyPacket extends CommandPacket {
     @SerializedName("name")
@@ -11,7 +11,7 @@ public class EconomyModifyPacket extends CommandPacket {
 
     @SerializedName("count")
     public double count;
-    public EconomyChangeInfomation infomation;
+    public EconomyChangeInformation information;
     private CommandType type;
 
     public EconomyModifyPacket(String name, double count, CommandType type) {
@@ -32,7 +32,7 @@ public class EconomyModifyPacket extends CommandPacket {
 
     @Override
     public EconomyModifyPacket complete(String json) {
-        infomation = new Gson().fromJson(json, EconomyChangeInfomation.class);
+        information = new Gson().fromJson(json, EconomyChangeInformation.class);
         future.complete(this);
         return this;
     }

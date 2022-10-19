@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.UUID;
 
-public class OfflinePlayerInfomation extends InfomationData {
+public class OfflinePlayerInformation extends InformationData {
     @SerializedName("name")
     public String name;
 
@@ -18,5 +18,5 @@ public class OfflinePlayerInfomation extends InfomationData {
     public long firstPlayed;
 
     @SerializedName("bedSpawnLocation")
-    public LocationInfomation location;
+    public LocationInformation location;
 }

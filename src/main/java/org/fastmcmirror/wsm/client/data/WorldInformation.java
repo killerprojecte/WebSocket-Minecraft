@@ -2,7 +2,7 @@ package org.fastmcmirror.wsm.client.data;
 
 import com.google.gson.annotations.SerializedName;
 
-public class WorldInfomation extends InfomationData {
+public class WorldInformation extends InformationData {
     @SerializedName("worldType")
     public String worldType;
 

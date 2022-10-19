@@ -8,7 +8,7 @@ import org.fastmcmirror.wsm.client.data.*;
 public class GetOfflinePlayerPacket extends CommandPacket {
     @SerializedName("name")
     public String name;
-    public InfomationData infomation;
+    public InformationData information;
     private CommandType type;
 
     public GetOfflinePlayerPacket(String name, CommandType type) {
@@ -30,15 +30,15 @@ public class GetOfflinePlayerPacket extends CommandPacket {
     public GetOfflinePlayerPacket complete(String json) {
         Class<?> cls = null;
         if (type == CommandType.GET_OFFLINE_PLAYER) {
-            cls = OfflinePlayerInfomation.class;
+            cls = OfflinePlayerInformation.class;
         } else if (type == CommandType.GET_PLAYER) {
-            cls = PlayerInfomation.class;
+            cls = PlayerInformation.class;
         } else if (type == CommandType.GET_PLAYERPOINTS) {
-            cls = IntInfomation.class;
+            cls = IntInformation.class;
         } else if (type == CommandType.GET_ECONOMY) {
-            cls = DoubleInfomation.class;
+            cls = DoubleInformation.class;
         }
-        infomation = (InfomationData) new Gson().fromJson(json, cls);
+        information = (InformationData) new Gson().fromJson(json, cls);
         future.complete(this);
         return this;
     }

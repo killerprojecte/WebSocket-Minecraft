@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class OfflinePlayersInfomation extends InfomationData {
+public class PlayersInformation extends InformationData {
     @SerializedName("data")
-    public List<OfflinePlayerInfomation> data;
+    public List<PlayerInformation> data;
 }

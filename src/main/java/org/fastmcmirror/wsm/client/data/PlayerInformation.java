@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.UUID;
 
-public class PlayerInfomation extends InfomationData {
+public class PlayerInformation extends InformationData {
     @SerializedName("displayName")
     public String displayName;
 
@@ -18,10 +18,10 @@ public class PlayerInfomation extends InfomationData {
     public double health;
 
     @SerializedName("location")
-    public LocationInfomation location;
+    public LocationInformation location;
 
     @SerializedName("world")
-    public WorldInfomation world;
+    public WorldInformation world;
 
     @SerializedName("uniqueId")
     public UUID uniqueId;

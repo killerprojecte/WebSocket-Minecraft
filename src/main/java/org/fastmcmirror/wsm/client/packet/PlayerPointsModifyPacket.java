@@ -3,7 +3,7 @@ package org.fastmcmirror.wsm.client.packet;
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 import org.fastmcmirror.wsm.client.command.CommandType;
-import org.fastmcmirror.wsm.client.data.PlayerPointsChangeInfomation;
+import org.fastmcmirror.wsm.client.data.PlayerPointsChangeInformation;
 
 public class PlayerPointsModifyPacket extends CommandPacket {
     @SerializedName("name")
@@ -11,7 +11,7 @@ public class PlayerPointsModifyPacket extends CommandPacket {
 
     @SerializedName("count")
     public int count;
-    public PlayerPointsChangeInfomation infomation;
+    public PlayerPointsChangeInformation information;
     private CommandType type;
 
     public PlayerPointsModifyPacket(String name, int count, CommandType type) {
@@ -32,7 +32,7 @@ public class PlayerPointsModifyPacket extends CommandPacket {
 
     @Override
     public PlayerPointsModifyPacket complete(String json) {
-        infomation = new Gson().fromJson(json, PlayerPointsChangeInfomation.class);
+        information = new Gson().fromJson(json, PlayerPointsChangeInformation.class);
         future.complete(this);
         return this;
     }

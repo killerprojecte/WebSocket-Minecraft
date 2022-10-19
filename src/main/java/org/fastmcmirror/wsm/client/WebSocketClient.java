@@ -16,17 +16,17 @@ public class WebSocketClient extends org.java_websocket.client.WebSocketClient {
 
     public WebSocketClient(URI serverUri) {
         super(serverUri);
-        InfomationParser.register("websocket", WebSocketInfomation.class);
-        InfomationParser.register("offlinePlayerData", OfflinePlayerInfomation.class);
-        InfomationParser.register("playerData", PlayerInfomation.class);
-        InfomationParser.register("offlinePlayersData", OfflinePlayersInfomation.class);
-        InfomationParser.register("onlinePlayersData", PlayersInfomation.class);
-        InfomationParser.register("playerPointsData", IntInfomation.class);
-        InfomationParser.register("changedPlayerPointsData", PlayerPointsChangeInfomation.class);
-        InfomationParser.register("economyData", DoubleInfomation.class);
-        InfomationParser.register("changedEconomyData", EconomyChangeInfomation.class);
-        InfomationParser.register("hasPermissionData", BooleanInfomation.class);
-        InfomationParser.register("placeholder", StringInfomation.class);
+        InformationParser.register("websocket", WebSocketInformation.class);
+        InformationParser.register("offlinePlayerData", OfflinePlayerInformation.class);
+        InformationParser.register("playerData", PlayerInformation.class);
+        InformationParser.register("offlinePlayersData", OfflinePlayersInformation.class);
+        InformationParser.register("onlinePlayersData", PlayersInformation.class);
+        InformationParser.register("playerPointsData", IntInformation.class);
+        InformationParser.register("changedPlayerPointsData", PlayerPointsChangeInformation.class);
+        InformationParser.register("economyData", DoubleInformation.class);
+        InformationParser.register("changedEconomyData", EconomyChangeInformation.class);
+        InformationParser.register("hasPermissionData", BooleanInformation.class);
+        InformationParser.register("placeholder", StringInformation.class);
         webSocket = this;
     }
 
@@ -41,7 +41,7 @@ public class WebSocketClient extends org.java_websocket.client.WebSocketClient {
 
     @Override
     public void onMessage(String message) {
-        InfomationParser.parse(new JsonParser().parse(message).getAsJsonObject());
+        InformationParser.parse(new JsonParser().parse(message).getAsJsonObject());
     }
 
     @Override

@@ -3,7 +3,7 @@ package org.fastmcmirror.wsm.client.packet;
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 import org.fastmcmirror.wsm.client.command.CommandType;
-import org.fastmcmirror.wsm.client.data.StringInfomation;
+import org.fastmcmirror.wsm.client.data.StringInformation;
 
 public class PlaceholderParsePacket extends CommandPacket {
     @SerializedName("name")
@@ -11,7 +11,7 @@ public class PlaceholderParsePacket extends CommandPacket {
 
     @SerializedName("placeholder")
     public String placeholder;
-    public StringInfomation infomation;
+    public StringInformation information;
 
     public PlaceholderParsePacket(String name, String placeholder) {
         this.name = name;
@@ -30,7 +30,7 @@ public class PlaceholderParsePacket extends CommandPacket {
 
     @Override
     public PlaceholderParsePacket complete(String json) {
-        infomation = new Gson().fromJson(json, StringInfomation.class);
+        information = new Gson().fromJson(json, StringInformation.class);
         future.complete(this);
         return this;
     }

@@ -2,7 +2,7 @@ package org.fastmcmirror.wsm.client.data;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ChunkInfomation extends InfomationData {
+public class ChunkInformation extends InformationData {
 
     @SerializedName("isLoaded")
     public boolean isLoaded;
@@ -20,5 +20,5 @@ public class ChunkInfomation extends InfomationData {
     public boolean isSlimeChunk;
 
     @SerializedName("world")
-    public WorldInfomation world;
+    public WorldInformation world;
 }

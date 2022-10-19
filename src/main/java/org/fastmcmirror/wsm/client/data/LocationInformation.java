@@ -2,7 +2,7 @@ package org.fastmcmirror.wsm.client.data;
 
 import com.google.gson.annotations.SerializedName;
 
-public class LocationInfomation extends InfomationData {
+public class LocationInformation extends InformationData {
     @SerializedName("x")
     public double x;
 
@@ -19,8 +19,8 @@ public class LocationInfomation extends InfomationData {
     public float pitch;
 
     @SerializedName("world")
-    public WorldInfomation world;
+    public WorldInformation world;
 
     @SerializedName("chunk")
-    public ChunkInfomation chunk;
+    public ChunkInformation chunk;
 }
